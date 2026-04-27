@@ -1,7 +1,0 @@
-int a;
-int b;
-float x;
-
-a = 5;
-y = a + b;
-x = a + 2.5;
