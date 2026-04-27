@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static Code Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h2>Static Code Analyzer</h2>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="panel-header">
+          <label for="code-input">Code to analyze</label>
+          <button type="button" class="btn btn-secondary" id="load-sample">Load sample</button>
+        </div>
+        <textarea id="code-input" placeholder="Enter your code here... e.g.&#10;int a;&#10;int b;&#10;a = 5;&#10;c = a + b;"></textarea>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="analyze">Analyze</button>
+      </div>
+
+      <section class="panel">
+        <div class="panel-header">
+          <label>Analysis output</label>
+        </div>
+        <div id="output" class="output"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
