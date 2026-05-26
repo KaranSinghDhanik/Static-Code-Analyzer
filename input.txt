@@ -1,4 +1,13 @@
-int a;
-int b;
-a = 5;
-c = a + b;
+int sum(int n) {
+    int i;
+    int total;
+    total = 0;
+    i = 0;
+    return total;
+}
+
+int main() {
+    int x;
+    x = sum(5);
+    return x;
+}

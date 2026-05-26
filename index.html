@@ -9,31 +9,116 @@
 <body>
   <div class="container">
     <header>
-      <h2>Static Code Analyzer</h2>
+      <h1>Static Code Analyzer</h1>
+      <p>Real-time compile-time analysis — errors appear as you type</p>
     </header>
 
     <main>
-      <section class="panel">
+      <section class="editor-section">
         <div class="panel-header">
-          <label for="code-input">Code to analyze</label>
-          <button type="button" class="btn btn-secondary" id="load-sample">Load sample</button>
+          <label for="editor">Code editor</label>
+          <div class="header-actions">
+            <span id="analysis-status" class="status-idle">Ready</span>
+            <button type="button" class="btn btn-secondary" id="load-sample">Load sample</button>
+          </div>
         </div>
-        <textarea id="code-input" placeholder="Enter your code here... e.g.&#10;int a;&#10;int b;&#10;a = 5;&#10;c = a + b;"></textarea>
+        <div id="editor" class="editor-container"></div>
       </section>
 
-      <div class="actions">
-        <button type="button" class="btn btn-primary" id="analyze">Analyze</button>
-      </div>
-
-      <section class="panel">
-        <div class="panel-header">
-          <label>Analysis output</label>
+      <section class="bottom-panel">
+        <div class="tabs">
+          <button type="button" class="tab active" data-tab="problems">Problems</button>
+          <button type="button" class="tab" data-tab="report">ATS Overview</button>
         </div>
-        <div id="output" class="output"></div>
+
+        <div id="problems-panel" class="tab-panel active">
+          <ul id="problems-list" class="problems-list">
+            <li class="problems-empty">Start typing — issues will appear here in real time.</li>
+          </ul>
+        </div>
+
+        <div id="report-panel" class="tab-panel">
+          <div class="ats-dashboard">
+            <div class="ats-main">
+              <div class="ats-score-card">
+                <div class="ats-score-ring">
+                  <svg viewBox="0 0 120 120" class="ats-score-svg">
+                    <circle class="ats-circle-bg" cx="60" cy="60" r="48"></circle>
+                    <circle
+                      class="ats-circle-fg"
+                      cx="60"
+                      cy="60"
+                      r="48"
+                      id="ats-score-ring-fill"
+                    ></circle>
+                  </svg>
+                  <div class="ats-score-center">
+                    <div id="ats-score-number" class="ats-score-number">--</div>
+                    <div class="ats-score-max">/ 100</div>
+                    <div id="ats-rating-label" class="ats-rating-label">No data yet</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ats-bars-card">
+                <div class="ats-bars-header">
+                  <span>Issue impact</span>
+                  <small>Lower is better</small>
+                </div>
+                <div class="ats-bars">
+                  <div class="ats-bar-row">
+                    <span class="ats-bar-label">Errors</span>
+                    <div class="ats-bar-track">
+                      <div id="ats-error-bar" class="ats-bar-fill error"></div>
+                    </div>
+                    <span id="ats-error-count-label" class="ats-bar-value">0</span>
+                  </div>
+                  <div class="ats-bar-row">
+                    <span class="ats-bar-label">Warnings</span>
+                    <div class="ats-bar-track">
+                      <div id="ats-warning-bar" class="ats-bar-fill warning"></div>
+                    </div>
+                    <span id="ats-warning-count-label" class="ats-bar-value">0</span>
+                  </div>
+                </div>
+
+                <div class="ats-legend">
+                  <div class="ats-legend-item">
+                    <span class="dot error"></span>
+                    <span>Each error: −15 pts</span>
+                  </div>
+                  <div class="ats-legend-item">
+                    <span class="dot warning"></span>
+                    <span>Each warning: −5 pts</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ats-raw-card">
+              <div class="ats-raw-header">
+                <span>Analyzer trace</span>
+                <button type="button" id="toggle-raw-report" class="btn btn-secondary btn-small">
+                  Show raw text
+                </button>
+              </div>
+              <div id="output" class="output ats-raw-output ats-raw-output-collapsed"></div>
+            </div>
+          </div>
+        </div>
       </section>
+
+      <footer class="status-bar">
+        <span id="error-count">0 errors</span>
+        <span class="status-separator">|</span>
+        <span id="warning-count">0 warnings</span>
+        <span class="status-separator">|</span>
+        <span id="ats-badge">ATS: —</span>
+      </footer>
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
